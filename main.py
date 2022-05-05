@@ -36,3 +36,11 @@ if __name__ == '__main__':
             break
         cmd = cmd_split[0]
         if cmd == 'loaddir':
+            if len(cmd_split) == 1:
+                logger.warning('Please provide a directory name to load!')
+                continue
+            elif not os.path.isdir(cmd_split[1]):
+                logger.warning(cmd_split[1] + ' is not a valid directory!')
+                continue
+            sc.load_directory(cmd_split[1])
+            logger.info(str(len(sc.songs)) + ' songs loaded [annoted: ' + str(len(sc.get_annotated())) + ']')
